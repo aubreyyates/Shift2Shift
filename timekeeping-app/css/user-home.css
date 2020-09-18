@@ -1,0 +1,17 @@
+#nav-panel-container{
+    width:100px;
+    left: 0px;
+    position:fixed;
+    height:calc(100% - 60px);
+    top: 60px;
+}
+#main-window-container {
+    width: calc(100% - 100px);
+    margin-left:100px;
+    background-color: rgb(245, 245, 245);
+    min-height: 800px;
+    margin-top:60px;
+}
+#create-account-div, #view-projects-div, #user-timekeeping-clock-div{
+    display:none;
+}

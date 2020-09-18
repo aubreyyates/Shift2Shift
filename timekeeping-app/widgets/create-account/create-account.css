@@ -1,0 +1,110 @@
+.signup-form {
+  width: 75%;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+.signup-form input {
+  width: calc(100% - 32px);
+  height: 40px;
+  padding: 0px 15px 0px 15px;
+  margin-bottom: 2px;
+  border: 1px solid rgb(214, 214, 214);
+  background-color: #fff;
+  border-radius: 2px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #111;
+  line-height: 40px;
+}
+#signup-header {
+  font-size: 23px;
+}
+.signup-form button {
+  display: block;
+  margin: 0 auto;
+  width: 30%;
+  height: 40px;
+  border: none;
+  background-color: #222;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+.signup-form-button {
+  display: block;
+  margin: 0 auto;
+
+  margin-bottom: 2px;
+  margin-top: 5px;
+  width: 120px;
+  height: 40px;
+  border: none;
+  border-radius: 30px;
+  background-color: #222;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+.signup-form button:hover {
+  background-color: #111;
+}
+.signup-form-button:hover {
+  background-color: rgb(48, 48, 48);
+}
+/*signup.php*/
+.form_area {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 30px;
+}
+@media only screen and (min-width: 500px) {
+  #signup-header {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (min-width: 680px) {
+  .form_area {
+    width: 58%;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .signup-form {
+    width: 360px;
+  }
+}
+
+.note-area{
+  display:none;
+}
+.note-icon-image{
+  height:28px;
+  width:32px;
+}
+.note-icon-container{
+  float:left;
+  margin-left:18px;
+  width: calc(20% - 18px);
+}
+.note-icon-container h4{
+  margin-left:4px;
+  font-size:18px;
+  padding:0px;
+  line-height:50px;
+}
+.note-icon-text{
+  float:left;
+}
+.note-icon-image-area{
+  float:left;
+}
+.note-header{
+  width:60%;
+  margin-left:20%;
+  text-align:center;
+}
