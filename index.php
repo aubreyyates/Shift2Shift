@@ -1,12 +1,12 @@
 <?php
 
     // Put header in the page
-    include_once 'widgets/header.php';
+    include_once 'widgets/login-system/header.php';
 
 ?>
 
 <link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
-<link href="css/index.css" rel="stylesheet">
+<link href="css/login-system/index.css" rel="stylesheet">
 
 <!-- Main part of page -->
 <section class="main-container-index">
@@ -16,9 +16,8 @@
         // -------------------------------- Checks if an users is logged in --------------------------------
             if (isset($_SESSION['id'])) {
 
-                $dir = "./timekeeping-app/";
                 // This is an attempt to make this project modularized.
-                include "timekeeping-app/user-home.php";
+                include "widgets/timekeeping-app/user-home.php";
             
             // -------------------------------- End of user Code --------------------------------
 
@@ -27,7 +26,7 @@
             // If no one is logged in, display the home page
             } else {
 
-                include "widgets/home-page.php";
+                include "widgets/login-system/home-page.php";
 
             }
         ?>

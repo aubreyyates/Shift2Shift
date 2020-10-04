@@ -1,0 +1,10 @@
+.timekeeping-app-view-employees-container{
+    width:calc(100% - 40px);
+    margin: 0 auto;
+}
+
+@media only screen and (min-width: 600px) {
+    .wide-form {
+        width:calc(100% - 80px);
+    }
+}

@@ -1,0 +1,29 @@
+.edit-form-input{
+    height: 40px;
+    padding: 0px 15px 0px 15px;
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #111;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 40px;
+    background-color: transparent;
+    margin-bottom:4px;
+}
+.edit-form-heading {
+    font-weight: bold;
+    font-family: 'Karla', sans-serif;
+    text-align: left;
+    margin-bottom:10px;
+}
+.edit-form{
+    text-align: left;
+}
+.edit-form-save{
+    float:left;
+}
+.edit-form-hidden-form-input{
+    display:none;
+}

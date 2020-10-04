@@ -1,0 +1,30 @@
+.note-area{
+    display:none;
+}
+.note-icon-image{
+    height:28px;
+    width:32px;
+}
+.note-icon-container{
+    float:left;
+    margin-left:18px;
+    width: calc(20% - 18px);
+}
+.note-icon-container h4{
+    margin-left:4px;
+    font-size:18px;
+    display:none;
+    padding:0px;
+    line-height:50px;
+}
+.note-icon-text{
+    float:left;
+}
+.note-icon-image-area{
+    float:left;
+}
+.note-header{
+    width:60%;
+    margin-left:20%;
+    text-align:center;
+}

@@ -1,0 +1,94 @@
+.entry-template {
+    width: 100%;
+    height: 41px;
+}
+.entry-line {
+    width: 100%;
+    height: 40px;
+    line-height:40px;
+    background-color: rgb(247, 247, 247);
+    font-size: 20px;
+    cursor: pointer;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.entry-line-user-data {
+    background-color: rgb(247, 247, 247);
+    height: 40px;
+    float:left;
+}
+.entry-line-user-data:hover {
+    background-color: rgb(197, 214, 230);
+}
+.entry-text-box {
+    /* background-color: rgb(144, 223, 255); */
+    /* background-color: rgb(247, 247, 247); */
+    /* border-bottom: 1px solid rgb(160, 160, 160); */
+    border-bottom: 1px solid rgb(207, 207, 207);
+    height:40px;
+    float:left;
+    border-right:1px solid white;
+    box-sizing: border-box;
+    padding-left:10px;
+    padding-right:10px;
+    width:25%;
+    text-align:left;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.entry-text-box-last {
+    margin-right:0px;
+    width:50%;
+}
+.entry-line-buttons {
+    float:left;
+}
+.entry-line-button{
+    height:40px;
+    width:40px;
+    border:none;
+    border-bottom: 1px solid rgb(207, 207, 207);
+    cursor:pointer;
+    float:left;
+}
+.entry-line-button-clock{
+    /* background-color:#67b2ff; */
+    background-color:#3a4d6f;
+}
+
+.entry-line-button-pencil{
+    /* background-color:#73a4d4; */
+    background-color:#3773ad
+}
+
+.entry-line-button-image-clock{
+    margin-top:2px;
+    height:28px;
+    width:28px;
+}
+.entry-line-button-image-pencil-icon{
+    margin-top:2px;
+    height:28px;
+    width:28px;
+}
+.entry-line-button-clock:hover{
+    /* background-color:#4392e2; */
+    background-color:#31425f;
+}
+.entry-line-button-pencil:hover{
+    /* background-color:#5f8ab4; */
+    background-color:#2d6497
+}
+.entry-empty-line{
+    background-color: rgb(247, 247, 247);
+    height: 40px;
+    text-align: left;
+    cursor: auto;
+}
+.entry-empty-line-text{
+    font-size:16px;
+    margin-left:10px;
+    font-family: nunito;
+    font-weight: bold;
+}

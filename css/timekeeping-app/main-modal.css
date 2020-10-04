@@ -1,0 +1,46 @@
+#timekeeping-app-main-modal{
+    position:fixed;
+    z-index:10;
+    right:-400px;
+    width:330px;
+    height:100%;
+    top:0px;
+    display:none;
+    background-color:rgb(253, 253, 253);
+    padding-left:20px;
+    padding-right:50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
+    -webkit-animation: main-modal-fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: main-modal-fadein 0.5s; /* Firefox < 16 */
+        -ms-animation: main-modal-fadein 0.5s; /* Internet Explorer */
+         -o-animation: main-modal-fadein 0.5s; /* Opera < 12.1 */
+            animation: main-modal-fadein 0.5s;
+    animation-fill-mode: forwards;
+}
+#timekeeping-app-main-modal-exit-container{
+    height:50px;
+}
+.timekeeping-app-main-modal-exit-button{
+    float:left;
+    height:14px;
+    width:14px;
+    box-sizing: border-box;
+    margin-top:20px;
+    border:none;
+    background-color:transparent;
+    cursor:pointer;
+    padding:0px;
+}
+.timekeeping-app-main-modal-exit-button-image{
+    height:14px;
+    width:14px;
+}
+
+@keyframes main-modal-fadein {
+    from { opacity: 0; right:-400px;}
+    to   { opacity: 1; right:0px;}
+}
+@keyframes main-modal-fadeout {
+    from { opacity: 1; right:0px;}
+    to   { opacity: 0; right:-400px;}
+}

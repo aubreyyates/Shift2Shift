@@ -1,0 +1,49 @@
+.timekeeping-app-entry-data-heading-container {
+    height: 30px;
+    line-height:30px;
+    overflow: hidden;
+}
+
+.timekeeping-app-entry-data-heading-container-heading{  
+    overflow: hidden;
+    height:30px;
+    float:left;
+    font-family: Karla;
+    /* border-left:1px solid rgb(165, 165, 165); */
+    box-sizing: border-box;
+    /* border-left:3px solid rgb(145, 187, 236); */
+    padding-left:10px;
+    width: 25%;
+    text-align:left;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    /* resize: horizontal; */
+    color:rgb(44, 44, 44);
+    /* border-bottom:2px solid rgb(112, 112, 112); */
+}
+.timekeeping-app-entry-data-heading-container-text{
+    font-size:20px;
+}
+
+.timekeeping-app-entry-data-heading-container-heading-last{
+    margin-right:0px;
+    width:calc(50% - 4px);
+}
+.timekeeping-app-entry-data-heading-container-heading:hover {
+    background-color:rgb(240, 240, 240);
+}
+.timekeeping-app-entry-data-heading-container-heading-draggable{
+    width:4px;
+    height:30px;
+    float:right;
+    cursor: w-resize;
+}
+.timekeeping-app-entry-data-heading-container-heading-draggable:hover{
+    background-color:rgb(4, 175, 206);
+}
+.timekeeping-app-entry-data-heading-container-text-container{
+    width: calc(100% - 4px);
+    float:left;
+}

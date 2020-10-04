@@ -1,0 +1,132 @@
+.timekeeping-app-item-finder-bar{
+    width:100%;
+    line-height: 1px;
+    overflow: auto;
+}
+
+.timekeeping-app-item-finder-bar-sorting-functions{
+    float:left;
+}
+
+.timekeeping-app-item-finder-bar-search-container{
+    width:100%;
+    height:34px;
+    position: relative;
+    margin-bottom :10px;
+}
+.timekeeping-app-item-finder-bar-search{
+    width:100%;
+    height: 34px;
+    padding-left:40px;
+    padding-right:30px;
+    box-sizing: border-box;
+    border: 1px solid #d6d6d6;
+    border-radius:2px;
+}
+
+.timekeeping-app-item-finder-bar-x-icon {
+    height:14px;
+    width:14px;
+    margin-top:10px;
+    position: absolute;
+    display:none;
+    top: 0px;
+    right:8px;
+    z-index: 1;
+}
+.timekeeping-app-item-finder-bar-x-icon-image {
+    height:14px;
+    width:14px;
+    cursor: pointer;
+}
+.timekeeping-app-item-finder-bar-search-icon{
+    height:34px;
+    position: absolute;
+    margin-left:8px;
+    margin-top: -34px;
+    line-height: 28px;
+}
+.timekeeping-app-item-finder-bar-search-icon-image{ 
+    height:22px;
+}
+.timekeeping-app-item-finder-bar-sort-container{
+    float:left;
+    margin-right:10px;
+}
+.timekeeping-app-item-finder-bar-sort{
+    width:100px;
+    height: 34px;
+    font-size:13px;
+    padding-right:15px;
+    box-sizing: border-box;
+    border: 1px solid #d6d6d6;
+    color: #b6b6b6;
+    float:right;
+    border-radius:0px 2px 2px 0px;
+    cursor: pointer;
+}
+.timekeeping-app-item-finder-bar-sort-direction-container{
+    width:38px;
+    margin-right:20px;
+    margin-bottom: 10px;
+    float:left;
+
+}
+.timekeeping-app-item-finder-bar-sort-direction{
+    width:100%;
+    height: 34px;
+    box-sizing: border-box;
+    border-radius:2px;
+    border: 1px solid #d6d6d6;
+    padding:0px;
+    background-color: white;
+    cursor: pointer;
+}
+.timekeeping-app-item-finder-bar-sort-direction-image{
+    height:30px;
+    width:30px;
+
+    margin: 0 auto;
+}
+
+.timekeeping-app-item-finder-bar-sort-label-container{
+    height: 34px;
+    float:right;
+    cursor: pointer;
+}
+.timekeeping-app-item-finder-bar-sort-label{
+    border-radius:2px 0px 0px 2px;
+    border: 1px solid #d6d6d6;
+    background-color: #f0f0f0;
+    border-right: 0px;
+    padding-left:10px;
+    padding-right:10px;
+    box-sizing: border-box;
+    line-height:34px;
+    color: #222222;
+    font-size:13px;
+    height: 34px;
+    text-align:right;
+}
+
+@media only screen and (min-width: 360px) {
+    .timekeeping-app-item-finder-bar-sort-direction-container{
+        float:right;
+        margin-bottom:0px;
+    }
+    .timekeeping-app-item-finder-bar-sort-container{
+        float:right;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .timekeeping-app-item-finder-bar-search-container{
+        width:200px;
+        float:right;
+        margin-bottom :0px;
+    }
+    .timekeeping-app-item-finder-bar-sorting-functions{
+        float:right;
+    }
+}
+

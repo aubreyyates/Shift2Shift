@@ -1,26 +1,26 @@
 <?php
     
     // Check if someone is signed in. Send them home if they are signed in.
-    include_once 'backend/check-for-user-logged-in.php';
+    include_once 'backend/login-system/check-for-user-logged-in.php';
     // Put the header in the page
-    include_once 'widgets/header.php';
+    include_once 'widgets/login-system/header.php';
 
 ?>
 
-<link href="css/signup.css" rel="stylesheet">
+<link href="css/login-system/signup.css" rel="stylesheet">
 
 <!-- Start main part of page -->
 <section class="main-container" style='padding:0px;min-width:300px;'>
 
     <?php
-        include "widgets/signup-error-alerts.php";
+        include "widgets/login-system/signup-error-alerts.php";
     ?>
 
     <div class="centered-wrapper">
         <div class='form_area'>
             <h3 id='signup-header'>Signup Your Company</h2>
             <div class='divider'></div>
-            <form id='account_form' class="signup-form" action="backend/signup-new-company.php" method="POST">
+            <form id='account_form' class="signup-form" action="backend/login-system/signup-new-company.php" method="POST">
                 <!-- Box to enter the employee's first name -->
                 <input class='form_input' id='first' type="text" name="first" placeholder="First Name">
                 <!-- Creates an alert to let them know they entered something wrong -->
@@ -79,7 +79,7 @@
 ?>
 <!-- End PHP -->
 
-<script src='js/signup.js'></script>
+<script src='js/login-system/signup.js'></script>
 
 <?php
     // Put the footer in the page
