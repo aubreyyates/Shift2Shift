@@ -4,8 +4,12 @@
 
 ?>
 
+
     <script src='js/timekeeping-app/moment.min.js'></script>
+    <script src='js/timekeeping-app/server-date.js'></script>
     <script src="js/timekeeping-app/duration-format.js"></script>
+    
+
     <script src="js/timekeeping-app/display-items.js"></script>
     <script src="js/timekeeping-app/search-items.js"></script>
     <script src="js/timekeeping-app/sort-items.js"></script>
@@ -14,6 +18,7 @@
     <script src="js/timekeeping-app/prepare-entry-headings.js"></script>
     <script src="js/timekeeping-app/prepare-empty-line.js"></script>
     <script src="js/timekeeping-app/create-employee-edit-form.js"></script>
+
 
     <link href="css/timekeeping-app/user-home.css" rel="stylesheet">
     <link href="css/timekeeping-app/edit-form.css" rel="stylesheet">
@@ -54,7 +59,7 @@
                     if ($_SESSION['authority_level'] >= 2) {
 
                         include './widgets/timekeeping-app/create-account.php'; 
-
+                        
                     }
                     
                 ?>

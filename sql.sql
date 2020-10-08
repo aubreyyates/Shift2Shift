@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
+-- version 4.9.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 04, 2020 at 10:46 AM
--- Server version: 5.6.35
--- PHP Version: 7.1.8
+-- Host: localhost:8889
+-- Generation Time: Oct 08, 2020 at 10:07 AM
+-- Server version: 5.7.26
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -24,19 +24,12 @@ CREATE TABLE `breaks` (
   `id` int(11) UNSIGNED NOT NULL,
   `break_start` bigint(16) NOT NULL,
   `break_end` bigint(16) NOT NULL DEFAULT '-1',
-  `break_length` int(11) NOT NULL,
+  `break_length` int(11) NOT NULL DEFAULT '0',
   `timestamp_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
   `submitted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `breaks`
---
-
-INSERT INTO `breaks` (`id`, `break_start`, `break_end`, `break_length`, `timestamp_id`, `user_id`, `company_id`, `submitted`) VALUES
-(34, 1601798788154, 1601798801227, 13073, 219, 97, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -54,7 +47,7 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`company_id`, `company_name`) VALUES
-(5, 'Demo Company');
+(6, 'Demo Company');
 
 -- --------------------------------------------------------
 
@@ -66,20 +59,12 @@ CREATE TABLE `timestamps` (
   `id` int(11) UNSIGNED NOT NULL,
   `timestamp_start` bigint(16) NOT NULL,
   `timestamp_end` bigint(16) NOT NULL DEFAULT '-1',
-  `timestamp_length` int(11) NOT NULL,
+  `timestamp_length` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
   `submitted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `timestamps`
---
-
-INSERT INTO `timestamps` (`id`, `timestamp_start`, `timestamp_end`, `timestamp_length`, `user_id`, `company_id`, `project_id`, `submitted`) VALUES
-(218, 1601798751585, 1601798764035, 12450, 97, 5, -1, 1),
-(219, 1601798785128, 1601798806605, 8404, 97, 5, -1, 1);
 
 -- --------------------------------------------------------
 
@@ -102,7 +87,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `authority_level`, `company_id`) VALUES
-(97, 'Jim', 'Brooks', 'demo@demo.com', '$2y$10$ib7eyZtNXcVwFo35HCT8NOkIgmbkWephRZE6VZNoDCNKN9kVvZs2m', 2, 5);
+(100, 'Andy', 'Green', 'demo@demo.com', '$2y$10$.nwlgYyqD5iMFhbgY6vtje3sHtoKmOEeF9Osq2Faa64Fkw0DElllC', 2, 6);
 
 --
 -- Indexes for dumped tables
@@ -140,19 +125,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `breaks`
 --
 ALTER TABLE `breaks`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
 --
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `company_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `company_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `timestamps`
 --
 ALTER TABLE `timestamps`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;

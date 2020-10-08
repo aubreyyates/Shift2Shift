@@ -8,7 +8,7 @@ shift2shift_globalv1.on_break = false;
 
 $(document).ready(function readyDoc() {
 
-    let break_start_timestamp = 0;
+    shift2shift_globalv1.server_sync = 0;
 
     // ajax call to see if there is any unsubmitted timestamp in the database
     $.post("backend/timekeeping-app/check-if-still-clocked-in.php", function (result) {
@@ -50,35 +50,37 @@ $(document).ready(function readyDoc() {
     // What happens if you click the take a break button
     $("#breakbtn").click(function () {
 
-        $.ajax({
-            type: "POST",
-            url: 'backend/timekeeping-app/break-start.php',
-            dataType: "text",
-            success: function (data) {
-                if (data != "Error. Clocked in timestamps is not equal to one." && data != "Error. A break has still not been submitted before.") {
-                    shift2shift_globalv1.break_start_timestamp = parseInt(data);
+        if (shift2shift_globalv1.on_break == false) {
 
-                    disable_clock_out_button();
+            $.ajax({
+                type: "POST",
+                url: 'backend/timekeeping-app/break-start.php',
+                dataType: "text",
+                success: function (data) {
+                    if (data != "Error. Clocked in timestamps is not equal to one." && data != "Error. A break has still not been submitted before.") {
+                        shift2shift_globalv1.break_start_timestamp = parseInt(data);
 
-                    disable_break_button();
+                        disable_clock_out_button();
+                        disable_break_button();
+                        enable_clock_in_button();
 
-                    enable_clock_in_button();
+                        shift2shift_globalv1.clocked_in = false;
+                        shift2shift_globalv1.on_break = true;
 
-                    shift2shift_globalv1.clocked_in = false;
+                        time = moment(shift2shift_globalv1.break_start_timestamp).format('hh:mm:ss A');
+                        add_notification_to_page("You started a break at " + time, "clock-break-icon.png");
 
-                    shift2shift_globalv1.on_break = true;
 
-                    time = moment(shift2shift_globalv1.break_start_timestamp).format('hh:mm:ss A');
-                    add_notification_to_page("You started a break at " + time, "clock-break-icon.png");
 
-                } else {
-                    alert(data);
+                    } else {
+                        alert(data);
+                    }
+                },
+                error: function () {
+                    alert('Error occured.');
                 }
-            },
-            error: function () {
-                alert('Error occured.');
-            }
-        });
+            });
+        }
 
 
     })
@@ -87,20 +89,26 @@ $(document).ready(function readyDoc() {
     // What happens if you click the clock in button
     $("#clockin").click(function () {
 
+        let calibration = Date.now();
 
         if (shift2shift_globalv1.on_break == false) {
 
             // Send data to create a timestamp.
+
+
+            shift2shift_globalv1.start_time = moment(ServerDate, "x");
+            shift2shift_globalv1.clocked_in = true;
+
             $.ajax({
                 type: "POST",
                 url: 'backend/timekeeping-app/timestamp-start.php',
-                data: ({ project_id: -1 }),
+                data: ({ project_id: -1, calibration: calibration }),
                 dataType: "text",
                 success: function (data) {
                     if (data != "Error. A timestamp has still not been submitted before.") {
-                        let timestamp = parseInt(data);
-                        shift2shift_globalv1.start_time = timestamp;
-                        shift2shift_globalv1.clocked_in = true;
+                        let result = JSON.parse(data);
+                        let timestamp = parseInt(result.timestamp);
+                        //alert(shift2shift_globalv1.server_sync.offset);
 
                         disable_clock_in_button();
                         enable_break_button();
@@ -109,7 +117,7 @@ $(document).ready(function readyDoc() {
                         // Changes the text of the clockin button to clock in
                         $("#clockin").val("Clock In");
 
-                        time = moment(shift2shift_globalv1.start_time).format('hh:mm:ss A');
+                        time = moment(timestamp).format('hh:mm:ss A');
                         add_notification_to_page("You clocked in at " + time, "clock-in-icon.png");
                     } else {
                         alert(data);
@@ -263,7 +271,6 @@ function add_notification_to_page(notification, icon) {
 
 }
 
-//Start the continuous clock at the top of the page
 setInterval(function () { continuous_clock(); }, 100);
 
 // Function to run clock at the top of the page that displays the time.
@@ -271,7 +278,8 @@ function continuous_clock() {
 
     // Update the time displayed in the clock.
     let clockDisplay = document.getElementById('world_clock');
-    clockDisplay.innerHTML = moment().format('hh:mm:ss A');
+    // clockDisplay.innerHTML = moment().add(shift2shift_globalv1.server_sync.offset, 'ms').format('hh:mm:ss A');
+    clockDisplay.innerHTML = moment(ServerDate.now(), "x").format('hh:mm:ss A');
 
     // Check if the user is clocked.
     if (shift2shift_globalv1.clocked_in == true) {
@@ -285,7 +293,7 @@ function continuous_clock() {
 // Update the clock in on the user-timekeeping-clock page.
 function clocked_timer() {
 
-    let current_time = moment();
+    let current_time = moment(ServerDate, "x");
     let clockedDisplay = document.getElementById('user-clock');
     clockedDisplay.innerHTML = moment.duration(current_time.diff(shift2shift_globalv1.start_time)).format("HH:mm:ss");
 }

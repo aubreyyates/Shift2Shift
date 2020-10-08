@@ -28,11 +28,8 @@
             exit();
         }
 
-
-
-
         // Get the project it is clocked for
-        $project_id = $_POST['project_id'];
+        $project_id = -1;
         // Get the company id 
         $company_id = $_SESSION['company_id'];
         // Prepare a statement
@@ -44,7 +41,16 @@
         // Close the connection
         mysqli_close($conn);
         // Return the time that they clocked in
-        echo sprintf('%f', $timestamp);
+        
+        $calibration = $_POST['calibration'];
+
+        $calibration = $timestamp - $calibration;
+
+        $json = json_encode(array('timestamp' => sprintf('%f', $timestamp), 'calibration' => $calibration));
+
+        echo $json;
+
+        exit();
     } else {
         // Send them back to home page
         header("Location: ../../index.php");
