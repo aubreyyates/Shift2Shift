@@ -14,25 +14,18 @@
         
         <?php
 
-            $employee_page_id = "timekeeping-app-item-finder-bar-employees";
+            $page = "timekeeping-app-item-finder-bar-employees";
+            $item_type = 'Employee';
+            $search_box_shown = true;
             include "item-finder-bar.php";
 
         ?>
 
         <div class='space20'></div>
         <div class='space20'></div>
-
-        <?php
-
-            $heading_page_id = "timekeeping-app-item-finder-bar-employees-heading";
-            $number_of_buttons = 2;
-            include "entry-data-heading-container.php";
-
-        ?>
-
         <div class='space10'></div>
 
-        <div id='timekeeping-app-view-employees-load'></div>
+        <div id='timekeeping-app-view-employees-load' class='font-1'></div>
 
     </div>
 

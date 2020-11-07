@@ -3,10 +3,8 @@
 // start a session
 session_start();
 
-if ($_SESSION['authority_level'] < 2) {
-    header("Location: ../../index.php");
-    exit();
-} 
+include_once 'check-authority.php';
+check_authority();
 
 // Make sure all posts are set that are needed.
 if (isset($_POST['first']) && isset($_POST['last']) && isset($_POST['email']) && isset($_POST['pwd']) && isset($_POST['authority_level'])) {
@@ -26,7 +24,6 @@ if (isset($_POST['first']) && isset($_POST['last']) && isset($_POST['email']) &&
     $email = filter_var($email, FILTER_SANITIZE_STRING);
     $pwd = filter_var($pwd, FILTER_SANITIZE_STRING);
     $authority_level  = filter_var($authority_level, FILTER_SANITIZE_STRING);
-
 
 // Error handlers
 if ($authority_level < 0 || $authority_level > 2) {
@@ -81,10 +78,12 @@ if (empty($first) || empty($last) || empty($email) || empty($pwd)){
                 $stmt->bind_param("ssssii",$first,$last,$email,$hashedPwd,$authority_level,$company_id);
                 // Execute the SQL
                 $stmt->execute();
+
+                $last_id = $conn->insert_id;
                 // Send them back to the last page
                 // Close the connection.
                 mysqli_close($conn);
-                echo "success";
+                echo $last_id;
                 exit();
             }
         }

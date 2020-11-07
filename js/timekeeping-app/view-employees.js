@@ -1,55 +1,83 @@
+
+
+
 // When the page is ready.
 $(document).ready(function () {
 
+    function delete_user(item) {
+        if (confirm(`Are you sure that you want to delete ${item.email}?`)) {
+            $.post("backend/timekeeping-app/user-delete.php", { id: item.id }, function (result) {
+                if (result == 'success') {
+                    shift2shift_globalv1.user_items.splice(shift2shift_globalv1.user_items.indexOf(item), 1);
+                    run_search_employee_table();
+                    popupInfo('popup-info-modal-update', 'User Deleted');
+                }
+            });
+        };
+    };
 
-    let headings = [{ text: "First Name", width: 25 }, { text: "Last Name", width: 25 }, { text: "E-mail", width: 50 }]
-    let html = prepare_entry_headings(headings);
-    $("#timekeeping-app-item-finder-bar-employees-heading").append(html);
 
-    $.post('backend/timekeeping-app/load-employees-to-objects.php', function (result) {
+    let property_texts = ["First Name", "Last Name", "E-mail"];
+    let property_values = ['first_name', 'last_name', 'email'];
+
+    property_values.forEach((property, i) => {
+        $("#timekeeping-app-item-finder-bar-employees-sort").append(new Option(property_texts[i], property));
+    })
+
+
+    let buttonFunctions = [delete_user];
+    itemCreator('User', ['id', 'first_name', 'last_name', 'email'], ['delete'], buttonFunctions);
+
+    $.post('backend/timekeeping-app/user-read.php', function (result) {
+
         // Turn the result into JSON objects
-        shift2shift_globalv1.entry_items = JSON.parse(result)
-        // Save the original object order
-        shift2shift_globalv1.entry_items_original_order = shift2shift_globalv1.entry_items;
+        shift2shift_globalv1.user_items_json = JSON.parse(result)
 
-        shift2shift_globalv1.entry_items = sort_items(shift2shift_globalv1.entry_items, "first_name");
+        shift2shift_globalv1.user_items = [];
+
+        shift2shift_globalv1.user_items_json.forEach(entry => {
+            user = new User(entry.id, entry.first_name, entry.last_name, entry.email);
+            shift2shift_globalv1.user_items.push(user);
+        });
+
+        shift2shift_globalv1.user_items_original_order = shift2shift_globalv1.user_items;
+
+        shift2shift_globalv1.user_items = sort_items(shift2shift_globalv1.user_items, "first_name");
 
         shift2shift_globalv1.view_employees_box_lengths = [25, 25, 50];
 
         shift2shift_globalv1.view_employees_buttons = [{ class: "entry-line-button-clock", image: "clock" }, { class: "entry-line-button-pencil entry-line-button-edit-employee", image: "pencil-icon" }];
-        // Display all items loaded
-        display_items("#timekeeping-app-view-employees-load", shift2shift_globalv1.entry_items, shift2shift_globalv1.view_employees_box_lengths, shift2shift_globalv1.view_employees_buttons);
+
+        let button_functions = [delete_button, edit_button, clock_button];
+
+
+
+
+        shift2shift_globalv1.employee_table = new Table(shift2shift_globalv1.user_items, 'timekeeping-app-view-employees-load', ['first_name', 'last_name', 'email'], [200, 200, 200], ["First Name", "Last Name", "E-mail"], { height: 50 }, ["delete-button", "edit-button", "clock-button"], button_functions, edit_button);
+        shift2shift_globalv1.employee_table.draw();
+
+        shift2shift_globalv1.search_box_employees = new searchBox('timekeeping-app-item-finder-bar-employees-search', 'email', search_results, shift2shift_globalv1.user_items);
+
+
+        function search_results(results) {
+            if (results === null) {
+                shift2shift_globalv1.employee_table.items = shift2shift_globalv1.user_items;
+                run_sort_employee_table(shift2shift_globalv1.employee_table);
+                return;
+            }
+            shift2shift_globalv1.employee_table.updateItems(results);
+        }
 
     })
 
-    // Search input
-    $('#timekeeping-app-item-finder-bar-employees-search').on('input', function () {
-        // Make sure the input isn't empty
-        if ($('#timekeeping-app-item-finder-bar-employees-search').val() == "") {
-            $("#timekeeping-app-item-finder-bar-employees-x-button").css("display", "none");
-            display_items("#timekeeping-app-view-employees-load", shift2shift_globalv1.entry_items, shift2shift_globalv1.view_employees_box_lengths, shift2shift_globalv1.view_employees_buttons);
-            return;
-        };
-
-        $("#timekeeping-app-item-finder-bar-employees-x-button").css("display", "block");
-
-        let search_quary = $('#timekeeping-app-item-finder-bar-employees-search').val();
-        display_items("#timekeeping-app-view-employees-load", search_items(shift2shift_globalv1.entry_items, search_quary), shift2shift_globalv1.view_employees_box_lengths, shift2shift_globalv1.view_employees_buttons);
-
-    });
-
     $('#timekeeping-app-item-finder-bar-employees-sort').on('change', function () {
-        sort_employees();
-    });
-
-    $('#timekeeping-app-item-finder-bar-employees-x-button').click(function () {
-        $("#timekeeping-app-item-finder-bar-employees-x-button").css("display", "none");
-        $('#timekeeping-app-item-finder-bar-employees-search').val("");
-        display_items("#timekeeping-app-view-employees-load", shift2shift_globalv1.entry_items, shift2shift_globalv1.view_employees_box_lengths, shift2shift_globalv1.view_employees_buttons);
+        run_sort_employee_table(shift2shift_globalv1.employee_table);
     });
 
     $('#timekeeping-app-item-finder-bar-employees-ascending-order').click(function () {
+
         let order = $(this).attr("value");
+        let property = $('#timekeeping-app-item-finder-bar-employees-sort').val();
 
         if (order == "ascending") {
             $("#timekeeping-app-item-finder-bar-employees-ascending-order-image").attr("src", "images/descending-icon.png");
@@ -59,91 +87,44 @@ $(document).ready(function () {
             this.value = "ascending";
         }
 
-        sort_employees();
+        sort_dropdown(this.value, property, shift2shift_globalv1.employee_table);
 
     });
 
-    $(document).on('click', '.entry-line-button-clock', function () {
-        $("#view-employees-div").css("display", "none");
-        $("#view-clocked-time-div").css("display", "block")
-        $(".nav-panel-07122020-nav-button").removeClass("nav-panel-07122020-nav-button-selected");
-        let item_id = $(this).data("id");
-        prepare_view_clocked_time(item_id)
-    });
+    $("#timekeeping-app-item-finder-bar-employees-add").click(function () {
 
-    $(document).on('click', '.entry-line-button-edit-employee', function () {
-        let item_id = $(this).data("id");
-        let item = search_for_item(item_id, shift2shift_globalv1.entry_items, "id");
-        let html = create_employee_edit_form(item);
+
+        let validation = [];
+        let headings = ["First Name", "Last Name", "E-mail", "Password", "Account Type"];
+        let inputType = ['text', 'text', 'text', 'text', 'select'];
+
+        validation.push('required data-pristine-required-message="Please choose a first name" maxlength=29 data-pristine-pattern="/[a-zA-z]+$/i" data-pristine-pattern-message="The first name must only have letters"');
+        validation.push('required data-pristine-required-message="Please choose a last name" maxlength=29 data-pristine-pattern="/[a-zA-z]+$/i" data-pristine-pattern-message="The last name must only have letters"');
+        validation.push('required data-pristine-required-message="Please choose an E-mail"  maxlength=59 type="email"');
+        validation.push('required data-pristine-required-message="Please choose a password" type="password" minlength="10" maxlength=99');
+        validation.push('required data-pristine-required-message="Please choose an account type"');
+
+
+        let options = `<option value="" disabled selected hidden><p style='color:grey;'>Account Type</p></option>
+        <option value=0 >Basic Employee</option>
+        <option value=2 >Admin</option>`
+
+        let input = ['first', 'last', 'email', 'pwd', 'authority_level'];
+
+        let html = generate_create_form('Create Employee', 'user', 'create', inputType, input, ['', '', '', '', options], headings, validation, -1, ['', '', '', '', '']);
+
         display_main_modal(html);
     });
+});
 
-    function sort_employees() {
-
-        let order = $("#timekeeping-app-item-finder-bar-employees-ascending-order").attr("value");
-        let property = $('#timekeeping-app-item-finder-bar-employees-sort').val();
-
-        if ($('#timekeeping-app-item-finder-bar-employees-search').val() != "") {
-            shift2shift_globalv1.entry_items = sort_items(shift2shift_globalv1.entry_items, property)
-            if (order == "descending") {
-                shift2shift_globalv1.entry_items = shift2shift_globalv1.entry_items.reverse();
-            }
-            let search_quary = $('#timekeeping-app-item-finder-bar-employees-search').val();
-            display_items("#timekeeping-app-view-employees-load", search_items(shift2shift_globalv1.entry_items, search_quary), shift2shift_globalv1.view_employees_box_lengths, shift2shift_globalv1.view_employees_buttons);
-        } else {
-            shift2shift_globalv1.entry_items = sort_items(shift2shift_globalv1.entry_items, property)
-            if (order == "descending") {
-                shift2shift_globalv1.entry_items = shift2shift_globalv1.entry_items.reverse();
-            }
-            display_items("#timekeeping-app-view-employees-load", shift2shift_globalv1.entry_items, shift2shift_globalv1.view_employees_box_lengths, shift2shift_globalv1.view_employees_buttons);
-        };
-
-    }
-
-    // function display_items_with_current_settings() {
-    //     if ($('#timekeeping-app-item-finder-bar-employees-search').val() != "") {
-    //         let search_quary = $('#timekeeping-app-item-finder-bar-employees-search').val();
-    //         display_items("#timekeeping-app-view-employees-load", search_items(shift2shift_globalv1.entry_items, search_quary), shift2shift_globalv1.view_employees_box_lengths, shift2shift_globalv1.view_employees_buttons);
-    //     } else {
-    //         display_items("#timekeeping-app-view-employees-load", shift2shift_globalv1.entry_items, shift2shift_globalv1.view_employees_box_lengths, shift2shift_globalv1.view_employees_buttons);
-    //     };
-    // }
-
-    function prepare_view_clocked_time(item_id) {
-        let item = search_for_item(item_id, shift2shift_globalv1.entry_items, "id");
-        if (item != false) {
-            let heading_text = item.first_name + " " + item.last_name + " Clocked Time";
-            $('#timekeeping-app-view-clocked-time-heading').text(heading_text);
-        }
-
-
-
-        $.post("backend/timekeeping-app/load-timestamps-to-objects.php", { id: item.id },
-            function (result) {
-                shift2shift_globalv1.timestamps = JSON.parse(result)
-                shift2shift_globalv1.view_clocked_time_box_lengths = [40, 40, 20];
-
-                // Turn unix times into readable times
-                for (i = 0; i < shift2shift_globalv1.timestamps.length; i++) {
-                    shift2shift_globalv1.timestamps[i].timestamp_start = moment(shift2shift_globalv1.timestamps[i].timestamp_start, "x").format("MM/DD/YYYY - hh:mm:ss A");
-                    shift2shift_globalv1.timestamps[i].timestamp_end = moment(shift2shift_globalv1.timestamps[i].timestamp_end, "x").format("MM/DD/YYYY - hh:mm:ss A");
-                    shift2shift_globalv1.timestamps[i].timestamp_length = moment.duration(shift2shift_globalv1.timestamps[i].timestamp_length, "milliseconds").format("HH:mm:ss.SSS");
-                }
-
-                // shift2shift_globalv1.view_clocked_time_buttons = [{ class: "entry-line-button-pencil", image: "pencil-icon" }];
-                shift2shift_globalv1.view_clocked_time_buttons = [];
-                // Display all items loaded
-                display_items("#timekeeping-app-view-clocked-time-load", shift2shift_globalv1.timestamps, shift2shift_globalv1.view_clocked_time_box_lengths, shift2shift_globalv1.view_clocked_time_buttons);
-
-            });
-
-
-    }
-
-})
-
-
-
+function run_sort_employee_table(table) {
+    let order = $("#timekeeping-app-item-finder-bar-employees-ascending-order").attr("value");
+    let property = $('#timekeeping-app-item-finder-bar-employees-sort').val();
+    sort_dropdown(order, property, table);
+}
+function run_search_employee_table() {
+    shift2shift_globalv1.search_box_employees.rerunSearch();
+}
 
 
 

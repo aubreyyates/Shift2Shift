@@ -1,0 +1,12 @@
+.search-box-cancel-button{
+	position: absolute;
+	right:0px;
+	top:0px;
+	margin-right:10px;
+	cursor:pointer;
+	display:none;
+	margin-top:5px;
+}
+.search-box-cancel-button{
+	stroke:rgb(44, 159, 212);
+}

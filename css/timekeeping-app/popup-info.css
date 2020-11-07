@@ -1,5 +1,4 @@
 #timekeeping-app-popup-info-container {
-    width:200px; 
     margin:0 auto;
 }
 #timekeeping-app-popup-info-left{
@@ -13,21 +12,39 @@
     padding:0;color:black; 
     font-size:20px; 
     line-height:48px;
+    padding-left:10px;
+    padding-right:10px;
 }
 
 #timekeeping-app-popup-info-checkmark{
     height:32px;
     width:32px;
+    padding-left:10px;
+    padding-right:10px;
+}
+#popup-info-modal-create{
+    position: fixed;
+    display:none;
+    top:5px; 
+    right:5px;
+    z-index: 11;
+    background-color:white;
 }
 
-#timekeeping-app-popup-info{
+#popup-info-modal-update{
+    position: fixed;
     display:none;
     top:70px; 
-    right:5%;
-    width:300px; 
-    position:fixed; 
+    right:40px;
+    z-index: 11;
+    background-color:white;
+}
+
+
+#timekeeping-app-popup-info{
     height:50px;
-    background-color:#fff;z-index:6; 
+    background-color:#fff;
+    z-index:6; 
     border-radius:5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

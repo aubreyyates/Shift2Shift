@@ -18,3 +18,10 @@ function display_main_modal(html) {
         shift2shift_globalv1.main_modal_visible = true;
     }
 }
+
+function hide_main_modal() {
+
+    $("#timekeeping-app-main-modal").css("display", "none")
+    shift2shift_globalv1.main_modal_visible = false;
+
+}

@@ -19,13 +19,7 @@
             echo 
             "
             <div style='margin: 0 auto; width: 200px;'>
-                <button class='hamburger-button' data-id='#nav-panel-07122020-nav-create-account' >Add Employees</button>
-            </div>
-
-            <div class='space20'></div>
-
-            <div style='margin: 0 auto; width: 200px;'>
-                <button class='hamburger-button' data-id='#nav-panel-07122020-nav-view-employees' >Manage Employees</button>
+                <button class='hamburger-button' data-id='#nav-panel-07122020-nav-view-employees'>Employees</button>
             </div>
 
             <div class='space20'></div>

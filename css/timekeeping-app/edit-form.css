@@ -12,6 +12,27 @@
     background-color: transparent;
     margin-bottom:4px;
 }
+.pristine-error{
+    font-family: "Nunito";
+    font-size: 14px;
+    line-height: 20px;
+    height:18px;
+    color: var(--delete-color);
+}
+
+.has-success .form-control {
+    border: 1px solid #168b3f;
+}
+
+.has-danger .form-control {
+    border: 1px solid var(--delete-color);
+}
+
+
+.form-group {
+    height:70px;
+}
+
 .edit-form-heading {
     font-weight: bold;
     font-family: 'Karla', sans-serif;
@@ -22,6 +43,7 @@
     text-align: left;
 }
 .edit-form-save{
+    margin-top:20px;
     float:left;
 }
 .edit-form-hidden-form-input{

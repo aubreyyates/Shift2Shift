@@ -2,25 +2,21 @@
 // Start a session
 session_start();
 
-if ($_SESSION['authority_level'] < 2) {
-    header("Location: ../../index.php");
-    exit();
-} 
+include_once 'check-authority.php';
+check_authority();
 
 // Check to make sure they are signed in
-if ($_SESSION['id'] && $_POST['id']) {
+if ($_SESSION['id']) {
 
     // Create a connection
     include_once 'database-connection.php';
 
     $company_id = $_SESSION['company_id'];
 
-    $user_id = $_POST['id'];
-
-    $stmt = $conn->prepare("SELECT * FROM timestamps WHERE company_id=? AND user_id=?;");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE company_id=?");
 
     // Put variables in
-    $stmt->bind_param("ii",  $company_id, $user_id);
+    $stmt->bind_param("i",  $company_id);
     // Execute the statement
     $stmt->execute();
     // Put the result into $result
@@ -32,12 +28,14 @@ if ($_SESSION['id'] && $_POST['id']) {
     foreach($result as $row) { 
         // Fill the array
         $data[] = array(
-            // Get timestamp start
-            'timestamp_start' => $row['timestamp_start'], 
-            // Get timestamp end
-            'timestamp_end' => $row['timestamp_end'],
-            // Get timestamp length
-            'timestamp_length' => $row['timestamp_length']
+            // Get the first name
+            'first_name' => $row['first_name'],
+            // Get the last name
+            'last_name' => $row['last_name'],
+            // Get the email
+            'email' => $row['email'],
+            // Get the id
+            'id' => $row['id'] 
         );
     }
     // return data in json

@@ -3,10 +3,8 @@
     // Start a session
     session_start();
 
-    if ($_SESSION['authority_level'] < 2) {
-        header("Location: ../../index.php");
-        exit();
-    } 
+    include_once 'check-authority.php';
+    check_authority();
 
     //Check to make sure a proper submission was made
     if (isset($_SESSION['id']) && isset($_POST['first']) && isset($_POST['last']) && isset($_POST['email']) && isset($_POST['id'])) {
@@ -20,24 +18,14 @@
         // Get email
         $email = $_POST['email'];
         // Get user id
-        $user_id = $_POST['id'];
-
-        // Temp
-        // $first = 'Jane';
-        // $last = 'Yoder';
-        // $email = 'ashleyyoder534@demo.com';
-        // $user_id = 89;
-
-
-        // Get the id of employee
-        $id = $_SESSION['id'];
+        $id = $_POST['id'];
 
         $first = filter_var($first, FILTER_SANITIZE_STRING);
         $last = filter_var($last, FILTER_SANITIZE_STRING);
         $email = filter_var($email, FILTER_SANITIZE_STRING);
 
         //Check for empty fields
-        if (empty($first) || empty($last) || empty($email) || empty($user_id)){
+        if (empty($first) || empty($last) || empty($email) || empty($id)){
             // Close the connection.
             mysqli_close($conn);
             echo "error";
@@ -59,7 +47,7 @@
                 } else {
                     // Checks employees for an email match
                     $stmt = $conn->prepare("SELECT * FROM users WHERE email=? AND id<>?;");
-                    $stmt->bind_param("si",$email, $user_id);
+                    $stmt->bind_param("si",$email, $id);
                     $stmt->execute();
                     $result = $stmt->get_result();        
                     $resultCheck = mysqli_num_rows($result);
@@ -74,7 +62,7 @@
                         // Get the company id
                         $company_id = $_SESSION['company_id'];
                         // Put variables into the statements
-                        $stmt->bind_param("sssii",$first,$last,$email,$user_id,$company_id);
+                        $stmt->bind_param("sssii",$first,$last,$email,$id,$company_id);
                         // Execute the SQL
                         $stmt->execute();
 

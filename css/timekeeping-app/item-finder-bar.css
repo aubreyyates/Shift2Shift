@@ -1,3 +1,9 @@
+:root {
+    --button-border-1: #d6d6d6;
+    --button-text-color-1: #b6b6b6;
+}
+
+
 .timekeeping-app-item-finder-bar{
     width:100%;
     line-height: 1px;
@@ -6,6 +12,29 @@
 
 .timekeeping-app-item-finder-bar-sorting-functions{
     float:left;
+}
+
+.timekeeping-app-item-finder-bar-add-button{
+    width:150px;
+    height: 34px;
+    font-size:13px;
+    box-sizing: border-box;
+    border: 1px solid var(--button-border-1);
+    background-color:transparent;
+    float:right;
+    color: black;
+    border-radius:2px;
+    cursor: pointer;
+}
+
+.timekeeping-app-item-finder-bar-add-button:hover {
+    background-color:var(--hover-color-1);
+    color:black;
+}
+
+.timekeeping-app-item-finder-bar-add-button-container{
+    float:left;
+    margin-right:10px;
 }
 
 .timekeeping-app-item-finder-bar-search-container{
@@ -20,7 +49,7 @@
     padding-left:40px;
     padding-right:30px;
     box-sizing: border-box;
-    border: 1px solid #d6d6d6;
+    border: 1px solid var(--button-border-1);
     border-radius:2px;
 }
 
@@ -59,25 +88,24 @@
     font-size:13px;
     padding-right:15px;
     box-sizing: border-box;
-    border: 1px solid #d6d6d6;
-    color: #b6b6b6;
+    border: 1px solid var(--button-border-1);
+    color: var(--button-text-color-1);
     float:right;
     border-radius:0px 2px 2px 0px;
     cursor: pointer;
 }
 .timekeeping-app-item-finder-bar-sort-direction-container{
     width:38px;
-    margin-right:20px;
     margin-bottom: 10px;
     float:left;
-
+    margin-right:10px;
 }
 .timekeeping-app-item-finder-bar-sort-direction{
     width:100%;
     height: 34px;
     box-sizing: border-box;
     border-radius:2px;
-    border: 1px solid #d6d6d6;
+    border: 1px solid var(--button-border-1);
     padding:0px;
     background-color: white;
     cursor: pointer;
@@ -96,7 +124,7 @@
 }
 .timekeeping-app-item-finder-bar-sort-label{
     border-radius:2px 0px 0px 2px;
-    border: 1px solid #d6d6d6;
+    border: 1px solid var(--button-border-1);;
     background-color: #f0f0f0;
     border-right: 0px;
     padding-left:10px;
@@ -117,16 +145,27 @@
     .timekeeping-app-item-finder-bar-sort-container{
         float:right;
     }
+    .timekeeping-app-item-finder-bar-sorting-functions{
+        margin-bottom:10px;
+    }
+    
 }
 
 @media only screen and (min-width: 600px) {
+
+
     .timekeeping-app-item-finder-bar-search-container{
         width:200px;
         float:right;
+        margin-left: 20px;
         margin-bottom :0px;
     }
     .timekeeping-app-item-finder-bar-sorting-functions{
         float:right;
+    }
+
+    .timekeeping-app-item-finder-bar-sort-direction-container{
+        margin-right:0px;
     }
 }
 

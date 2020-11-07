@@ -13,10 +13,6 @@
                 <img src='images/home.png' class='nav-panel-07122020-image'>
                 <p class='nav-panel-image-text'>Home</p>
             </button>
-            <button class='nav-panel-07122020-nav-button' id='nav-panel-07122020-nav-create-account'>
-                <img src='images/add-employee.png' class='nav-panel-07122020-image'>
-                <p class='nav-panel-image-text'>Add</p>
-            </button>
             <button class='nav-panel-07122020-nav-button' id='nav-panel-07122020-nav-view-employees'>
                 <img src='images/view-employee.png' class='nav-panel-07122020-image'>
                 <p class='nav-panel-image-text'>Manage</p>
@@ -25,6 +21,7 @@
         ";
         }
         ?>
+
 
             <!-- <button class='nav-panel-07122020-nav-button' id='nav-panel-07122020-nav-view-projects'>
                 <img src='images/clipboard.png' class='nav-panel-07122020-image'>

@@ -1,4 +1,4 @@
-shift2shift_globalv1 = {};
+// shift2shift_globalv1 = {};
 // Total Clocked time set to 0
 shift2shift_globalv1.clocked_time = 0;
 // Clocked in set to false
@@ -22,7 +22,7 @@ $(document).ready(function readyDoc() {
 
                 shift2shift_globalv1.clocked_in = false;
                 shift2shift_globalv1.on_break = true;
-                shift2shift_globalv1.start_time = result.time_for_clock;
+                shift2shift_globalv1.start_time = ServerDate.now() - result.total_clocked_time;
 
                 let clockedDisplay = document.getElementById('user-clock');
                 clockedDisplay.innerHTML = moment.duration(result.total_clocked_time).format("HH:mm:ss");
@@ -93,12 +93,10 @@ $(document).ready(function readyDoc() {
 
         if (shift2shift_globalv1.on_break == false) {
 
-            // Send data to create a timestamp.
-
-
-            shift2shift_globalv1.start_time = moment(ServerDate, "x");
             shift2shift_globalv1.clocked_in = true;
+            shift2shift_globalv1.start_time = moment(ServerDate, "x");
 
+            // Send data to create a timestamp.
             $.ajax({
                 type: "POST",
                 url: 'backend/timekeeping-app/timestamp-start.php',
@@ -108,6 +106,7 @@ $(document).ready(function readyDoc() {
                     if (data != "Error. A timestamp has still not been submitted before.") {
                         let result = JSON.parse(data);
                         let timestamp = parseInt(result.timestamp);
+
                         //alert(shift2shift_globalv1.server_sync.offset);
 
                         disable_clock_in_button();
@@ -135,7 +134,7 @@ $(document).ready(function readyDoc() {
                 url: 'backend/timekeeping-app/break-end.php',
                 success: function (data) {
                     let result = JSON.parse(data);
-                    shift2shift_globalv1.start_time = result.timestamp - result.timestamp_length;
+                    shift2shift_globalv1.start_time = ServerDate.now() - result.timestamp_length;
 
                     shift2shift_globalv1.clocked_in = true;
                     shift2shift_globalv1.on_break = false;

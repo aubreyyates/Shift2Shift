@@ -1,0 +1,141 @@
+:root {
+	--color: #1e90ff;
+	--delete-color: #c92222;
+	--clock-color: #3a4d6f;
+	--edit-color: #3773ad;
+	--table-border: #e4e4e4;
+	--table-row: #f7f7f7;
+	--hover-color-1: #ececec;
+	
+}
+
+.tabilization-table{
+	position: relative;
+	border-left: 1px solid var(--table-border);
+	border-right: 1px solid var(--table-border);
+}
+.table-main-section{
+	overflow-x : scroll;
+}
+
+.table-row:nth-child(odd) {
+	background-color: var(--table-row);
+}
+
+.table-row{
+	height:40px;
+	border-top:1px solid var(--table-border);
+	cursor:pointer;
+	min-width:100%;
+	width:200%;
+	overflow:hidden;
+}
+.table-row-no-results{
+	font-family: 'Nunito', Arial;
+	width:100%;
+	overflow:hidden;
+	padding-left:12px;
+	box-sizing: border-box;
+	line-height: 40px;
+	font-size:16px;
+	text-align:left;
+	height:40px;
+	border-top:1px solid var(--table-border);
+}
+
+.table-row-cells {
+	float:left;
+}
+.table-row-cells:hover{
+	background-color:var(--hover-color-1);
+}
+
+.table-cell{
+	width:500px;
+	float:left;
+    height:40px;
+	border-right:1px solid var(--table-border);
+	background-color:transparent;
+	box-sizing: border-box;
+    font-family: Nunito;
+    line-height:40px;
+}
+.resize-handle {
+	width:5px;
+	height:100%;
+	float:right;
+	cursor: col-resize;
+}
+.heading-cell {
+	text-align: left;
+	font-weight: bold;
+    line-height: 40px;
+    font-size:24px;
+    padding-left:12px;
+    padding-right:12px;
+    box-sizing: border-box;
+}
+.header-cell-text{
+	float:left;
+}
+.resize-handle:hover {
+	background-color:purple;
+}
+
+.row-buttons-div{
+	position: absolute;
+	right:0px;
+}
+
+.table-cell input {
+	border:none;
+	height:36px;
+	width:100%;
+	background-color:transparent;
+	cursor:pointer;
+    outline:none;
+    padding-left:12px;
+	padding-right:12px;
+	box-sizing: border-box;
+}
+
+.table-button {
+    float:right;
+    height:40px;
+	width:40px;
+	right:0px;
+	cursor:pointer;
+    box-sizing: border-box;
+    border:none;
+}
+
+.edit-button{
+	background: url("../../images/pencil-icon.png");
+	background-size:32px 32px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color:var(--edit-color);
+}
+.edit-button:hover{
+	background-color: #2f6699;
+}
+.delete-button{
+	background: url("../../images/trash-icon.png");
+	background-size:18px 18px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color:var(--delete-color);
+}
+.delete-button:hover{
+	background-color:#af1b1b;
+}
+.clock-button{
+	background: url("../../images/clock.png");
+	background-size:28px 28px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color:var(--clock-color);
+}
+.clock-button:hover {
+	background-color: #31425f;
+}
