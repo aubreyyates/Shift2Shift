@@ -9,7 +9,7 @@
     //Check to make sure a proper submission was made
     if (isset($_SESSION['id']) && isset($_POST['id'])) {
         
-        include_once 'database-connection.php';
+        require_once 'database-connection.php';
 
         $id = $_POST['id'];
 

@@ -8,21 +8,11 @@ check_authority();
 // Check to make sure they are signed in
 if ($_SESSION['id']) {
 
-    // Create a connection
-    include_once 'database-connection.php';
+    include_once 'config/init.php';
 
-    $company_id = $_SESSION['company_id'];
+    $user = new User();
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE company_id=?");
-
-    // Put variables in
-    $stmt->bind_param("i",  $company_id);
-    // Execute the statement
-    $stmt->execute();
-    // Put the result into $result
-    $result = $stmt->get_result(); 
-    // create an empty array
-    $data = array();
+    $result = $user->getAll($_SESSION['company_id']);
 
     // Go through the results
     foreach($result as $row) { 
@@ -38,10 +28,9 @@ if ($_SESSION['id']) {
             'id' => $row['id'] 
         );
     }
+
     // return data in json
     echo json_encode($data);
-    // Close the connection.
-    mysqli_close($conn);
 
     exit();
 

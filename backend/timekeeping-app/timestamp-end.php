@@ -5,7 +5,7 @@
     if (isset($_SESSION['id'])) {
 
         // Create a connection
-        include_once 'database-connection.php';
+        require_once 'database-connection.php';
         // Get the employee's id
         $id = $_SESSION['id']; 
         // Set not submitted.

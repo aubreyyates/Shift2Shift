@@ -8,23 +8,14 @@
     
     //Check to make sure a proper submission was made
     if (isset($_SESSION['id']) && isset($_POST['id'])) {
-        
-        include_once 'database-connection.php';
 
-        $id = $_POST['id'];
+        include_once 'config/init.php';
 
-        //Insert the user into the database
-        $stmt = $conn->prepare("DELETE FROM users WHERE id=? AND company_id=?;");
-        // Get the company id
-        $company_id = $_SESSION['company_id'];
-        // Put variables into the statements
-        $stmt->bind_param("ii",$id,$company_id);
-        // Execute the SQL
-        $stmt->execute();
+        $user = new User();
 
-        // Close the connection.
-        mysqli_close($conn);
-        echo "success";
+        $result = $user->deleteUser($_POST['id'], $_SESSION['company_id']);
+
+        echo $result;
         exit();
 
     } else {

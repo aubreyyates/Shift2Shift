@@ -5,7 +5,7 @@
     // Check to make sure a user is signed in
     if (isset($_SESSION['id'])) {
         // Creates the database connection
-        include_once 'database-connection.php';
+        require_once 'database-connection.php';
         // Prepare statement.
         $stmt = $conn->prepare("SELECT company_name FROM companies WHERE company_id=?;");
         // Put the variables in

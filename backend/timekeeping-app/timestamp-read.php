@@ -9,7 +9,7 @@ check_authority();
 if ($_SESSION['id'] && $_POST['id']) {
 
     // Create a connection
-    include_once 'database-connection.php';
+    require_once 'database-connection.php';
 
     $company_id = $_SESSION['company_id'];
 

@@ -4,7 +4,7 @@
     // Check to see if an employee is signed in
     if (isset($_SESSION['id'])) {
         // Create a connection
-        include_once 'database-connection.php';
+        require_once 'database-connection.php';
         // Default submitted to no
         $submitted = 0;
         // Get the employee's id

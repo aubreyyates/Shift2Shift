@@ -4,7 +4,7 @@
     // Check to make sure a proper submission was done
     if (isset($_SESSION['id'])) {
         // Create a connection
-        include_once 'database-connection.php';
+        require_once 'database-connection.php';
         // Start submitted to no because they haven't clocked out yet
         $submitted = 0;
         // Get the employee's id

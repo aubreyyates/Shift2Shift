@@ -2,16 +2,14 @@
 // Start a session
 session_start();
 
-if ($_SESSION['authority_level'] < 2) {
-    header("Location: ../../index.php");
-    exit();
-} 
+include_once 'check-authority.php';
+check_authority();
 
 // Check to make sure they are signed in
 if ($_SESSION['id']) {
 
     // Create a connection
-    include_once 'database-connection.php';
+    require_once 'database-connection.php';
 
     $company_id = $_SESSION['company_id'];
 
